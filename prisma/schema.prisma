@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,4 +5,63 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id      String   @id @default(uuid())
+  email   String   @unique
+  courses Course[]
+}
+
+model Course {
+  id                 String              @id @default(uuid())
+  name               String
+  grade              Int
+  subject            String
+  userId             String
+  units              Unit[]
+  learningObjectives LearningObjective[]
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  user               User                @relation(fields: [userId], references: [id])
+}
+
+model Unit {
+  id                 String              @id @default(uuid())
+  title              String
+  description        String
+  startDate          DateTime
+  endDate            DateTime
+  courseId           String
+  lessons            Lesson[]
+  learningObjectives LearningObjective[]
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  course             Course              @relation(fields: [courseId], references: [id])
+}
+
+model Lesson {
+  id                 String              @id @default(uuid())
+  title              String
+  description        String
+  date               DateTime
+  unitId             String
+  learningObjectives LearningObjective[]
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  unit               Unit                @relation(fields: [unitId], references: [id])
+}
+
+model LearningObjective {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  courseId  String?
+  unitId    String?
+  lessonId  String?
+  course    Course?  @relation(fields: [courseId], references: [id])
+  unit      Unit?    @relation(fields: [unitId], references: [id])
+  lesson    Lesson?  @relation(fields: [lessonId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

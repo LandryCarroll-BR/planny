@@ -4,6 +4,7 @@ import '@/styles/globals.css'
 import { cn } from '@/lib/utils'
 import { fontSans } from '@/lib/fonts'
 import { siteConfig } from '@/config/site'
+import { Providers } from '@/components/providers'
 
 export const metadata: Metadata = {
   title: {
@@ -12,7 +13,28 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(siteConfig.url),
   description: siteConfig.description,
-  keywords: [],
+  keywords: [
+    'Lesson planning',
+    'Educator tools',
+    'Teaching resources',
+    'Classroom management',
+    'AI lesson planner',
+    'Teacher assistant app',
+    'Curriculum planning',
+    'Educational technology',
+    'Teacher productivity',
+    'Lesson organization',
+    'School planning software',
+    'AI-driven education',
+    'Classroom efficiency',
+    'Teacher support',
+    'Custom lesson plans',
+    'Lesson scheduling',
+    'Education innovation',
+    'Teacher empowerment',
+    'Streamlined lesson preparation',
+    'Personalized teaching assistant',
+  ],
   creator: 'landrycarroll',
   openGraph: {
     type: 'website',
@@ -38,10 +60,9 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
+    // shortcut: '/favicon-16x16.png',
+    // apple: '/apple-touch-icon.png',
   },
-  manifest: `${siteConfig.url}/site.webmanifest`,
 }
 
 export default function RootLayout({
@@ -50,8 +71,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>{children}</body>
-    </html>
+    <Providers>
+      <html lang="en">
+        <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>{children}</body>
+      </html>
+    </Providers>
   )
 }
