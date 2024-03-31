@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.9",
@@ -22,6 +23,7 @@
     "eslint-plugin-unused-imports": "^3.1.0",
     "lucide-react": "^0.363.0",
     "next": "14.1.4",
+    "next-safe-action": "^6.2.0",
     "prisma": "^5.11.0",
     "react": "^18",
     "react-dom": "^18",
